@@ -1,8 +1,24 @@
+from collections import OrderedDict
 import dataclasses
 
 import einops
 import numpy as np
-from omnigibson.learning.utils.eval_utils import PROPRIOCEPTION_INDICES
+
+try:
+    from omnigibson.learning.utils.eval_utils import PROPRIOCEPTION_INDICES
+except ModuleNotFoundError:
+    PROPRIOCEPTION_INDICES = {
+        "R1Pro": OrderedDict(
+            {
+                "arm_left_qpos": np.s_[158:165],
+                "gripper_left_qpos": np.s_[193:195],
+                "arm_right_qpos": np.s_[197:204],
+                "gripper_right_qpos": np.s_[232:234],
+                "trunk_qpos": np.s_[236:240],
+                "base_qvel": np.s_[253:256],
+            }
+        )
+    }
 
 from openpi import transforms
 from openpi.models import model as _model
