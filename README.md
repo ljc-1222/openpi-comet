@@ -246,6 +246,13 @@ After finetuning, you can run evaluation by following the steps below:
     ```
     This opens a connection listening on 0.0.0.0:8000. Please check the `scripts/serve_b1k.py` for more details.
 
+    For the b1k workspace A2C2 online residual evaluation, use
+    `../a2c2/scripts/serve_a2c2_b1k.py` instead. This fork exposes
+    `Policy.infer_with_prefix_z(...)` and `Pi0.sample_actions(...,
+    return_prefix_z=True)` so the A2C2 wrapper can correct each executed base
+    chunk action with the latest BEHAVIOR observation. See `../a2c2/README.md`
+    for the smoke test and two-terminal evaluation command.
+
 
 2. Run the evaluation on BEHAVIOR:
 
