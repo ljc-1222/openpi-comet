@@ -57,6 +57,9 @@ class WebsocketPolicyServer:
                 infer_time = time.monotonic() - infer_start
 
                 response = {"action": action.cpu().numpy(), "server_timing": {"infer_ms": infer_time * 1000}}
+                a2c2_info = getattr(self._policy, "last_a2c2_info", None)
+                if a2c2_info is not None:
+                    response["a2c2"] = deepcopy(a2c2_info)
                 if prev_total_time is not None:
                     response["server_timing"]["prev_total_ms"] = prev_total_time * 1000
 
